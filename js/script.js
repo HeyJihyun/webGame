@@ -72,6 +72,8 @@ function setKeyboardEvent() {
     console.log("why");
     switch (e.key) {
       case " ":
+      case "v":
+      case "V":
         if (!isJumping) {
           jump();
         }
