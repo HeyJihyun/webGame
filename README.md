@@ -6,7 +6,7 @@
 공격에 성공할 시 점수가 더 높습니다!<br>
 별은 5초에 한번씩 사용할 수 있습니다.
 
-      - 점프 : space
+      - 점프 : space or v
       - 공격 : z
 ### 2. 캐릭터 및 출현 몬스터
 플레이어 <br> <img src = "assets/player.gif" width = "100px"> <br>
