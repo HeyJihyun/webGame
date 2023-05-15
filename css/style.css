@@ -16,9 +16,9 @@
  /* 게임기 모양 container */
  .container {
      position: absolute;
-     /* top: 50%; */
+     top: 50%;
      left: 49.9%;
-     transform: translate(-50%, 0%);
+     transform: translate(-50%, -50%);
      width: 780px;
      height: 930px;
      z-index: -1;
@@ -142,7 +142,7 @@
      right: 70px;
      bottom: 300px;
      color: white;
-     font-size: 2rem;
+     font-size: 1.2rem;
      font-weight: bold;
      vertical-align: middle;
  }
