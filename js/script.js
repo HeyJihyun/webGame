@@ -26,6 +26,8 @@ function gameStart() {
   $(".startBox, .gameOverBox").slideUp(); // start,gameover box 안보이게
   backgroundmusic(); // 배경음악 시작
 
+  isJumping = false; // 점프 중
+  isAttacking = false; // 공격중
   score = 0; // 점수 초기화
   updateScore();
   position = 0; // 배경 위치 초기화
@@ -33,6 +35,7 @@ function gameStart() {
   player.css("bottom", "20px");
 
   setKeyboardEvent(); // keyboard이벤트 실행
+  setClickEvent();
   monsterStart(); // monster 움직이게
 
   // 120 프레임으로 반복
@@ -69,12 +72,11 @@ function moveBackground() {
 function setKeyboardEvent() {
   $("html").keydown(function (e) {
     console.log(e.key);
-    console.log("why");
     switch (e.key) {
       case " ":
-        if (!isJumping) {
-          jump();
-        }
+      case "v":
+      case "V":
+        jump();
         break;
       case "z":
       case "Z":
@@ -85,28 +87,44 @@ function setKeyboardEvent() {
   });
 }
 
+// 클릭 이벤트
+function setClickEvent() {
+  $("#jump").click(function () {
+    jump();
+  });
+  $("#attack").click(function () {
+    if (!isAttacking) {
+      attack();
+    }
+  });
+}
+
 // 플레이어 점프
 function jump() {
-  isJumping = true;
-  new Audio("./assets/jump.mp3").play(); // jump 효과음
-  player
-    .animate({ bottom: "130px" }, 500)
-    .animate({ bottom: "20px" }, 500, function () {
-      isJumping = false;
-    });
-  star.animate({ bottom: "200px" }, 500).animate({ bottom: "90px" }, 500);
+  if (!isJumping) {
+    isJumping = true;
+    new Audio("./assets/jump.mp3").play(); // jump 효과음
+    player
+      .animate({ bottom: "130px" }, 500)
+      .animate({ bottom: "20px" }, 500, function () {
+        isJumping = false;
+      });
+    star.animate({ bottom: "200px" }, 500).animate({ bottom: "90px" }, 500);
+  }
 }
 
 // 공격하기
 function attack() {
-  isAttacking = true;
-  new Audio("./assets/attack.wav").play();
-  star.animate({ bottom: "50px", left: "100px" }).animate({ left: "500px" });
+  if (!isAttacking) {
+    isAttacking = true;
+    new Audio("./assets/attack.wav").play();
+    star.animate({ bottom: "50px", left: "100px" }).animate({ left: "500px" });
 
-  setTimeout(() => {
-    star.css("left", "70px").css("bottom", "90px").show();
-    isAttacking = false;
-  }, 5000);
+    setTimeout(() => {
+      star.css("left", "70px").css("bottom", "90px").show();
+      isAttacking = false;
+    }, 5000);
+  }
 }
 
 // 공격 성공
